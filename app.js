@@ -14,14 +14,20 @@ app.use(express.static('public'));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.get('/', function(req, res) {
-  res.render('home');
+  flightAffiliateSearch().then(function(data) {
+    res.send(data);
+  })
 });
+
+// app.get('/', function(req, res) {
+//   res.render('home');
+// });
 
 function flightAffiliateSearch() {
   let options = {
     url: 'https://api.sandbox.amadeus.com/v1.2/flights/affiliate-search',
     qs: {
-      apikey: 'H4XTx5eByROgFxSiVnmpAFWYjbJbqGEC',
+      apikey: apiKey,
       origin: 'NYC',
       destination: 'ICN',
       departure_date: '2018-06-24',
