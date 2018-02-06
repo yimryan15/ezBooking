@@ -13,6 +13,12 @@ app.set('view engine', 'handlebars');
 app.use(express.static('public'));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
+app.get('/', function(req, res) {
+    res.send ('Hello World');
+});
+
+//app.get()
+
 app.listen(3000, function() {
     console.log('Listening on port 3000');
 });
