@@ -51,21 +51,32 @@ function normalizeFlightData(data) {
       duration: outBoundDuration,
       flights: [{
         departs_at: outDepartTime,
-        arrives_at: outArriveTime
-      }]
+        arrives_at: outArriveTime,
+        origin: {
+          airport: outboundCity
+        }
+      }],
     },
     inbound: {
       duration: inBoundDuration,
-      flights: [{
+      flights: [
+      {
         departs_at: inDepartTime,
-        arrives_at: inArriveTime
-      }]
+        arrives_at: inArriveTime,
+        origin: {
+          airport: inboundCity
+        }
+      },
+      origin
+      ]
     },
     deep_link: deepLink,
     fare: {
       total_price: price
     }
   } = data;
+
+  console.log(data.outbound.flights[0])
 
   return {
     outBoundDuration,
@@ -74,8 +85,10 @@ function normalizeFlightData(data) {
     price,
     outDepartTime,
     outArriveTime,
+    outboundCity,
     inDepartTime,
-    inArriveTime
+    inArriveTime,
+    inboundCity
   }
 }
 
