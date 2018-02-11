@@ -1,13 +1,12 @@
-<h1>EZ Booking</h1>
-<h4>Please ensure the origin and destination locations are in IATA airport/city formats</h4>
-origin (req):
-<input type="text" name="origin" value="">
-destination (req):
-<input type="text" name="destination" value="">
-departure_date (req):
-<input id="dep-date" type="date">
-return_date (optional):
-<input id="return-date" type="date">
-max_price (optional):
-<input id="price" type="text" name="price" value="">
-<input type="submit" value="Submit">
+{{#each flightData}}
+<div class="results-container">
+  <div class="outbound">
+    <p>outbound duration: {{outBoundDuration}}</p>
+  </div>
+  <div class="inbound">
+    <p>inbound duration: {{inBoundDuration}}</p>
+  </div>
+  <p>price: ${{price}}</p>
+  <a target="_blank" href="{{deepLink}}">Link to Book Flight</a>
+</div>
+{{/each}}

@@ -4,8 +4,23 @@
       <meta charset="utf-8">
       <title>EZ Booking App</title>
       <link rel="stylesheet" href="/styles/style.css">
+      <script src="/jquery/jquery.js"></script>
+      <script src="/scripts/click-events.js"></script>
   </head>
   <body>
+    <h1>EZ Booking</h1>
+    <h4>Please ensure the origin and destination locations are in IATA airport/city formats</h4>
+    origin (req):
+    <input id="origin" type="text" name="origin" value="">
+    destination (req):
+    <input id="dest" type="text" name="destination" value="">
+    departure_date (req):
+    <input id="dep-date" type="date">
+    return_date (optional):
+    <input id="return-date" type="date">
+    max_price (optional):
+    <input id="price" type="text" name="price" value="">
+    <input id="submit" type="submit" value="Submit">
 
       {{{body}}}
 

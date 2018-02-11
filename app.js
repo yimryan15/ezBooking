@@ -11,27 +11,103 @@ app.use(logger('dev'));
 app.engine('handlebars', exphbs({defaultLayout: 'index'}));
 app.set('view engine', 'handlebars');
 app.use(express.static('public'));
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.get('/', function(req, res) {
-  flightAffiliateSearch().then(function(data) {
-    res.send(data);
-  })
+  res.render('home');
 });
 
-// app.get('/', function(req, res) {
-//   res.render('home');
+app.get('/getFlightInfo/:origin', function(req, res) {
+  const origin = req.params.origin
+  const destination = req.params.destination
+  const depDate = req.params.depDate
+  const returnDate = req.params.returnDate
+  const maxPrice = req.params.maxPrice
+
+  console.log(origin);
+
+  flightAffiliateSearch(origin, destination, depDate, returnDate, maxPrice).then(function(data) {
+    if (data.errors) {
+      res.send(data.errors)
+    } else {
+      return data;
+    }
+  })
+  .then(function(data) {
+    const normalizedFlightData = data.results.map(function(data) {
+      return normalizeFlightData(data);
+    })
+
+    const result = {
+      flightData: normalizedFlightData
+    }
+    res.render('home', result);
+  })
+
+});
+
+
+// app.get('/getFlightInfo', function(req, res) {
+//   flightAffiliateSearch().then(function(data) {
+//     if (data.errors) {
+//       res.send(data.errors)
+//     } else {
+//       return data;
+//     }
+//   })
+//   .then(function(data) {
+//     const normalizedFlightData = data.results.map(function(data) {
+//       return normalizeFlightData(data);
+//     })
+//
+//     const result = {
+//       flightData: normalizedFlightData
+//     }
+//     res.render('home', result);
+//   })
+//
 // });
 
-function flightAffiliateSearch() {
+function normalizeFlightData(data) {
+  const {
+    outbound: {
+      duration: outBoundDuration,
+    },
+    inbound: {
+      duration: inBoundDuration,
+    },
+    deep_link: deepLink,
+    fare: {
+      total_price: price
+    }
+  } = data;
+
+  return {
+    outBoundDuration,
+    inBoundDuration,
+    deepLink,
+    price
+  }
+}
+
+function flightAffiliateSearch(ori, dest, dep_date, ret_date, price) {
   let options = {
     url: 'https://api.sandbox.amadeus.com/v1.2/flights/affiliate-search',
     qs: {
+      // apikey: apiKey,
+      // origin: 'NYC',
+      // destination: 'ICN',
+      // departure_date: '2018-06-24',
+      // return_date: '2018-06-28',
+      // max_price: '10000',
+      // currency: 'USD'
       apikey: apiKey,
-      origin: 'NYC',
-      destination: 'ICN',
-      departure_date: '2018-06-24',
-      return_date: '2018-06-28',
+      origin: ori,
+      destination: dest,
+      departure_date: dep_date,
+      return_date: ret_date,
+      max_price: price,
       currency: 'USD'
     },
     json: true
