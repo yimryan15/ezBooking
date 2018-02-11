@@ -18,14 +18,12 @@ app.get('/', function(req, res) {
   res.render('home');
 });
 
-app.get('/getFlightInfo/:origin', function(req, res) {
+app.get('/getFlightInfo/:origin/:destination/:depDate/:returnDate/:maxPrice?', function(req, res) {
   const origin = req.params.origin
   const destination = req.params.destination
   const depDate = req.params.depDate
   const returnDate = req.params.returnDate
   const maxPrice = req.params.maxPrice
-
-  console.log(origin);
 
   flightAffiliateSearch(origin, destination, depDate, returnDate, maxPrice).then(function(data) {
     if (data.errors) {
@@ -47,29 +45,41 @@ app.get('/getFlightInfo/:origin', function(req, res) {
 
 });
 
-
-// app.get('/getFlightInfo', function(req, res) {
-//   flightAffiliateSearch().then(function(data) {
-//     if (data.errors) {
-//       res.send(data.errors)
-//     } else {
-//       return data;
-//     }
-//   })
-//   .then(function(data) {
-//     const normalizedFlightData = data.results.map(function(data) {
-//       return normalizeFlightData(data);
-//     })
-//
-//     const result = {
-//       flightData: normalizedFlightData
-//     }
-//     res.render('home', result);
-//   })
-//
-// });
-
 function normalizeFlightData(data) {
+  const {
+    outbound: {
+      duration: outBoundDuration,
+      flights: [{
+        departs_at: outDepartTime,
+        arrives_at: outArriveTime
+      }]
+    },
+    inbound: {
+      duration: inBoundDuration,
+      flights: [{
+        departs_at: inDepartTime,
+        arrives_at: inArriveTime
+      }]
+    },
+    deep_link: deepLink,
+    fare: {
+      total_price: price
+    }
+  } = data;
+
+  return {
+    outBoundDuration,
+    inBoundDuration,
+    deepLink,
+    price,
+    outDepartTime,
+    outArriveTime,
+    inDepartTime,
+    inArriveTime
+  }
+}
+
+function normalizeinnerFlightData(data) {
   const {
     outbound: {
       duration: outBoundDuration,
@@ -95,13 +105,6 @@ function flightAffiliateSearch(ori, dest, dep_date, ret_date, price) {
   let options = {
     url: 'https://api.sandbox.amadeus.com/v1.2/flights/affiliate-search',
     qs: {
-      // apikey: apiKey,
-      // origin: 'NYC',
-      // destination: 'ICN',
-      // departure_date: '2018-06-24',
-      // return_date: '2018-06-28',
-      // max_price: '10000',
-      // currency: 'USD'
       apikey: apiKey,
       origin: ori,
       destination: dest,
