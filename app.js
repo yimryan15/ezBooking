@@ -33,86 +33,105 @@ app.get('/getFlightInfo/:origin/:destination/:depDate/:returnDate/:maxPrice?', f
     }
   })
   .then(function(data) {
-    const normalizedFlightData = data.results.map(function(data) {
-      return normalizeFlightData(data);
+    // const normalizedFlightData = data.results.map(function(data) {
+    //   return normalizeFlightData(data);
+    // })
+    const outboundFlights = [];
+    const inboundFlights = [];
+
+    data.results.forEach(function(obj) {
+      obj.outbound.flights.forEach(function (flight) {
+        outboundFlights.push(getOBData(flight));
+      })
     })
 
-    const result = {
-      flightData: normalizedFlightData
+    data.results.forEach(function(obj) {
+      obj.inbound.flights.forEach(function (flight) {
+        inboundFlights.push(getOBData(flight));
+      })
+    })
+
+    const renderData = {
+
+      outboundFlights,
+      inboundFlights
     }
-    res.render('home', result);
+
+    res.render('home', renderData);
   })
 
 });
 
-function normalizeFlightData(data) {
+function getOBData(data) {
   const {
-    outbound: {
-      duration: outBoundDuration,
-      flights: [{
-        departs_at: outDepartTime,
-        arrives_at: outArriveTime,
-        origin: {
-          airport: outboundCity
-        }
-      }],
+    departs_at: obDepartTime,
+    arrives_at: obArriveTime,
+    origin: {
+      airport: obCity
     },
-    inbound: {
-      duration: inBoundDuration,
-      flights: [
-      {
-        departs_at: inDepartTime,
-        arrives_at: inArriveTime,
-        origin: {
-          airport: inboundCity
-        }
-      },
-      origin
-      ]
-    },
-    deep_link: deepLink,
-    fare: {
-      total_price: price
-    }
-  } = data;
-
-  console.log(data.outbound.flights[0])
-
-  return {
-    outBoundDuration,
-    inBoundDuration,
-    deepLink,
-    price,
-    outDepartTime,
-    outArriveTime,
-    outboundCity,
-    inDepartTime,
-    inArriveTime,
-    inboundCity
-  }
-}
-
-function normalizeinnerFlightData(data) {
-  const {
-    outbound: {
-      duration: outBoundDuration,
-    },
-    inbound: {
-      duration: inBoundDuration,
-    },
-    deep_link: deepLink,
-    fare: {
-      total_price: price
+    destination: {
+      airport: obDestCity
     }
   } = data;
 
   return {
-    outBoundDuration,
-    inBoundDuration,
-    deepLink,
-    price
+    obCity,
+    obDestCity,
+    obDepartTime,
+    obArriveTime
   }
 }
+
+// function normalizeFlightData(data) {
+//   const {
+//     outbound: {
+//       duration: obDuration,
+//       flights: [{
+//         departs_at: obDepartTime,
+//         arrives_at: obArriveTime,
+//         origin: {
+//           airport: obCity
+//         },
+//         destination: {
+//           airport: obDestCity
+//         }
+//       }],
+//     },
+//     inbound: {
+//       duration: ibDuration,
+//       flights: [
+//       {
+//         departs_at: ibDepartTime,
+//         arrives_at: ibArriveTime,
+//         origin: {
+//           airport: ibCity
+//         },
+//         destination: {
+//           airport: ibDestCity
+//         }
+//       }],
+//     },
+//     deep_link: deepLink,
+//     fare: {
+//       total_price: price
+//     }
+//   } = data;
+//
+//   return {
+//     obDuration,
+//     obDepartTime,
+//     obArriveTime,
+//     obCity,
+//     obDestCity,
+//     ibDuration,
+//     ibDepartTime,
+//     ibArriveTime,
+//     ibCity,
+//     ibDestCity,
+//     deepLink,
+//     price
+//   }
+// }
 
 function flightAffiliateSearch(ori, dest, dep_date, ret_date, price) {
   let options = {

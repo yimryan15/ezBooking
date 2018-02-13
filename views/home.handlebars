@@ -1,18 +1,22 @@
-{{#each flightData}}
 <div class="results-container">
+  {{#each outboundFlights }}
   <div class="outbound">
-    <p>outbound origin city: {{outboundCity}}</p>
-    <p>outbound duration: {{outBoundDuration}}</p>
-    <p>outbound departure time: {{outDepartTime}}</p>
-    <p>outbound arrival time: {{outArriveTime}}</p>
+    <p>outbound duration: {{obDuration}}</p>
+    <p>outbound origin city: {{obCity}}</p>
+    <p>outbound destination city: {{obDestCity}}</p>
+    <p>outbound departure time: {{obDepartTime}}</p>
+    <p>outbound arrival time: {{obArriveTime}}</p>
   </div>
+  {{/each}}
+  {{#each inboundFlights}}
   <div class="inbound">
-    <p>inbound origin city: {{inboundCity}}</p>
-    <p>inbound duration: {{inBoundDuration}}</p>
-    <p>inbound departure time: {{inDepartTime}}</p>
-    <p>inbound departure time: {{inArriveTime}}</p>
+    <p>inbound duration: {{obDuration}}</p>
+    <p>inbound origin city: {{obCity}}</p>
+    <p>inbound destination city: {{obDestCity}}</p>
+    <p>inbound departure time: {{obDepartTime}}</p>
+    <p>inbound arrival time: {{obArriveTime}}</p>
   </div>
+  {{/each}}
   <p>price: ${{price}}</p>
   <a target="_blank" href="{{deepLink}}">Link to Book Flight</a>
 </div>
-{{/each}}
