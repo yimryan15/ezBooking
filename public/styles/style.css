@@ -1,16 +1,23 @@
-body {
+@import url('http://fonts.googleapis.com/css?family=Oswald');
+
+body, {
   margin: 0;
-  padding: 10;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 100;
-  background-image: url(http://xinature.com/wp-content/uploads/2016/10/beaches-waves-vacation-palm-nature-trees-water-palmtrees-beach-isle-clouds-hill-sea-season-huts-ocean-sand-island-paradise-tropical-sky-pier-bungalows-hd-wallpaper-iphone-6-1920x1080.jpg);
-  background-repeat: no-repeat;
-  background-position: right top;
-  background-attachment: fixed;
+  padding: 0;
+  height: 100%;
+  width: 100%;
 }
+
+body, .bg-im {
+  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  background: url(../images/wallpaper.jpg);
+  background-size: auto;
+  }
 
 .logo {
   display: block;
+  margin-top: 0;
   margin-left: auto;
   margin-right: auto;
   width: 25%;
@@ -30,31 +37,36 @@ body {
   transition: background .5s;
 }
 
-#intro {
-  color: white;
-}
-
-#info-cont {
-  background-color: rgb(21, 69, 172);
-  background-size: width 70%;
-  color: white;
-  padding: 0 90px;
-  display: block;
-  margin-top: 10%;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-}
-
-@media (min-width:850px) {
-  .header h1 {
-    font-size: 120px;
-  }
+#container {
+  background: linear-gradient(45deg, rgba(112, 150, 255, 0.90) 0%, rgba(94, 97, 255, 0.90) 51%, rgba(230, 39, 125, 0.90) 100%);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 14px;
+  padding: 10px 10px;
+  color: #ffffff;
+  font: 15px 'Oswald', serif;
+  max-width: 1550px;
+  margin: 8% auto;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .results-container {
-  background: white;
-  display: flex;
-  border: solid cornflowerblue 5px;
+  background: linear-gradient(45deg, rgba(112, 150, 255, 0.90) 0%, rgba(94, 97, 255, 0.90) 51%, rgba(230, 39, 125, 0.90) 100%);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 14px;
+  padding: 10px 10px;
+  color: #ffffff;
+  font: 15px 'Oswald', serif;
+  max-width: 1550px;
+  margin: 8% auto;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
   opacity: 0.85;
+  display: flex;
 }

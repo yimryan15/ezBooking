@@ -9,8 +9,9 @@
   </head>
   <body>
     <div class='logo'><img src='/images/EZBooking-Logo-03-01-01.png'></div>
-    <container id='info-cont'>
-      <h4 id="intro">Please ensure the origin and destination locations are in IATA airport/city formats</h4>
+    <div id="container">
+        <div class='bg-im'></div>
+      <h2>Please ensure the origin and destination locations are in IATA airport/city formats</h2>
       origin (req):
       <input id="origin" type="text" name="origin" value="{{inputData.origin}}">
       destination (req):
@@ -22,7 +23,7 @@
       max_price (optional):
       <input id="price" type="text" name="price" value="{{inputData.maxPrice}}">
       <input id="submit" class="btn" type="submit" value="Submit">
-    </container>
+    </div>
 
       {{{body}}}
 
