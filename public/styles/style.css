@@ -11,8 +11,8 @@ body, .bg-im {
   margin: auto;
   margin-left: auto;
   margin-right: auto;
-  background: url(http://www.4usky.com/data/out/32/164268415-exotic-wallpapers.jpg) no-repeat;
-  background-size: cover;
+  background: url(../images/wallpaper.jpg);
+  background-size: auto;
   }
 
 .logo {
