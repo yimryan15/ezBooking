@@ -26,8 +26,8 @@ app.get('/getFlightInfo/:origin/:destination/:depDate/:returnDate/:maxPrice?', f
   const maxPrice = req.params.maxPrice
 
   flightAffiliateSearch(origin, destination, depDate, returnDate, maxPrice).then(function(data) {
-    if (data.errors) {
-      res.send(data.errors)
+    if (data.results.length === 0) {
+      res.render('error')
     } else {
       return data;
     }
@@ -59,8 +59,17 @@ app.get('/getFlightInfo/:origin/:destination/:depDate/:returnDate/:maxPrice?', f
       }
     })
 
+    const inputData = {
+      origin,
+      destination,
+      depDate,
+      returnDate,
+      maxPrice
+    }
+
     const renderData = {
-      flightData
+      flightData,
+      inputData
     }
 
     res.render('home', renderData);
