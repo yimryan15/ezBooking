@@ -4,8 +4,25 @@
       <meta charset="utf-8">
       <title>EZ Booking App</title>
       <link rel="stylesheet" href="/styles/style.css">
+      <script src="/jquery/jquery.js"></script>
+      <script src="/scripts/click-events.js"></script>
   </head>
   <body>
+    <div class='logo'><img src='/images/EZBooking-Logo-03-01-01.png'></div>
+    <container id='info-cont'>
+      <h4 id="intro">Please ensure the origin and destination locations are in IATA airport/city formats</h4>
+      origin (req):
+      <input id="origin" type="text" name="origin" value="{{inputData.origin}}">
+      destination (req):
+      <input id="dest" type="text" name="destination" value="{{inputData.destination}}">
+      departure_date (req):
+      <input id="dep-date" type="date" value="{{inputData.depDate}}">
+      return_date (optional):
+      <input id="return-date" type="date" value="{{inputData.returnDate}}">
+      max_price (optional):
+      <input id="price" type="text" name="price" value="{{inputData.maxPrice}}">
+      <input id="submit" class="btn" type="submit" value="Submit">
+    </container>
 
       {{{body}}}
 
