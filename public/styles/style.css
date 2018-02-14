@@ -13,9 +13,8 @@ body, .bg-im {
     margin-right: auto;
     background: url(http://www.4usky.com/data/out/32/164268415-exotic-wallpapers.jpg) no-repeat;
     background-size: cover;
-
-
   }
+
 .logo {
     display: block;
     margin-top: 0;
@@ -24,31 +23,50 @@ body, .bg-im {
     width: 25%;
 }
 
-  .btn {
-    color: #fff;
-    background: rgb(196, 217, 48);
-    padding: 10px 40px;
-    text-decoration: none; 
-    transition: background .5s; 
-  }
+.btn {
+  color: #fff;
+  background: rgb(196, 217, 48);
+  padding: 10px 40px;
+  text-decoration: none;
+  transition: background .5s;
+}
 
-  .btn:hover, .nav ul li:hover {
-    background: #117bff;
-    cursor: pointer; 
-    transition: background .5s;  
-  }
-  
-    #container {
-      background: linear-gradient(45deg, rgba(112, 150, 255, 0.90) 0%, rgba(94, 97, 255, 0.90) 51%, rgba(230, 39, 125, 0.90) 100%);
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-      border-radius: 14px;
-      padding: 10px 10px;
-      color: #ffffff;
-      font: 15px 'Oswald', serif;
-      max-width: 1550px;
-      margin: 8% auto;
-      text-align: center;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+.btn:hover, .nav ul li:hover {
+  background: #117bff;
+  cursor: pointer;
+  transition: background .5s;
+}
+
+#container {
+  background: linear-gradient(45deg, rgba(112, 150, 255, 0.90) 0%, rgba(94, 97, 255, 0.90) 51%, rgba(230, 39, 125, 0.90) 100%);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 14px;
+  padding: 10px 10px;
+  color: #ffffff;
+  font: 15px 'Oswald', serif;
+  max-width: 1550px;
+  margin: 8% auto;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.results-container {
+  background: linear-gradient(45deg, rgba(112, 150, 255, 0.90) 0%, rgba(94, 97, 255, 0.90) 51%, rgba(230, 39, 125, 0.90) 100%);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 14px;
+  padding: 10px 10px;
+  color: #ffffff;
+  font: 15px 'Oswald', serif;
+  max-width: 1550px;
+  margin: 8% auto;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  opacity: 0.85;
+  display: flex;
+}
